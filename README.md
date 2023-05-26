@@ -3,4 +3,4 @@
 
 
 学习 
-照着https://github.com/funnyzak/ChatMate-GPT敲，学习
+照着https://github.com/funnyzak/ChatMate-GPT   敲，学习
