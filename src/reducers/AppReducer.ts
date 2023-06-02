@@ -1,19 +1,21 @@
+/**
+ * Created by Leon<silenceace@gmail.com> at 2023-03-14.
+ */
+
 import { ABOUT_US } from '@src/config'
 import {
   APP_INIT,
+  APP_INIT_ERROR,
   APP_LATEST_VERSION,
   Action,
-  APP_INIT_ERROR,
   IState
 } from '../types'
-
 const INITIAL_STATE: IState.AppState = {
   aboutUs: ABOUT_US,
   version: {
     version: '1.0.0'
   }
 }
-
 export default (
   state: IState.AppState = INITIAL_STATE,
   action: Action
