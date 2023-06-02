@@ -12,6 +12,7 @@ import {
   useQuickAction
 } from '@src/helper'
 import { logInfo } from '@src/helper/logger'
+import { getLocale, translate } from '@src/i18n'
 import {
   useAppDispatch,
   useAppSelector,
@@ -246,8 +247,11 @@ export const ChatCompontent = (chat: ChatProps) => {
   const inputPlaceholder = useMemo(
     () =>
       openAISetting.showModelName
-        ? 'inputPlaceholderWithModel'
-        : 'chat.inputPlaceholder',
+        ? translate('chat.inputPlaceholderWithModel').replace(
+            '{model}',
+            chatModel
+          )
+        : translate('chat.inputPlaceholder'),
     [chatModel, openAISetting]
   )
   const GptUser = useMemo(

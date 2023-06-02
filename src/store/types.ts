@@ -5,6 +5,7 @@ import {
 import { ConversationOrderByType } from '@src/helper/conversation'
 import { ThemeType } from '@src/theme'
 import { ChatConversation } from '@src/types'
+import { LanguageTagType } from '@src/i18n'
 export namespace IState {
   export interface State {
     app: AppState
@@ -52,6 +53,7 @@ export namespace IState {
   export interface SettingState {
     hapticFeedback: boolean
     theme: ThemeType
+    languageTag: LanguageTagType
     themeNightMode: ThemeType
     themeLightMode: ThemeType
 

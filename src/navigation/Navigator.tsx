@@ -18,26 +18,41 @@ import { useAppDispatch, useAppSelector } from '@src/hooks'
 import { createStackNavigator } from '@react-navigation/stack'
 import { ROUTES, RootStackParamList } from './routes'
 import NavigationService from './NavigationService'
-import { RootState } from '@src/store'
+import { RootState, store } from '@src/store'
 import { SNStatusBar } from '@src/screens/components'
 import * as Screens from '@src/screens'
 import OpenAIApi from '@src/api'
 import { ApiServersInitData } from '@src/config'
+import {
+  LanguageTagType,
+  changeLocale,
+  getLocale,
+  translate
+} from '@src/i18n'
 import { defaultScreenOptions as _defaultScreenOptions } from './ScreenHelper'
 import { Theme, useTheme } from '@src/theme'
+import { changeDayJsLocale } from '@src/utils/date'
 
 const defaultScreenOptions = (theme: Theme) => {
   return _defaultScreenOptions(theme, {})
 }
 const StackNavigator = createStackNavigator<RootStackParamList>()
+const resetLocales = (locale: LanguageTagType) => {
+  changeLocale(locale)
+  changeDayJsLocale(getLocale())
+}
 export const AppNavigationContainer = () => {
   const appState = useRef(AppState.currentState)
-  const { openAISetting } = useAppSelector(
-    (state: RootState) => state
-  )
+  const {
+    setting: { languageTag, pasteFromClipboard, icloudSync },
+    openAISetting
+  } = useAppSelector((state: RootState) => state)
   const { theme } = useTheme()
   const dispatch = useAppDispatch()
   useEffect(() => {
+    // 设置语言
+    resetLocales(store.getState().setting.languageTag)
+
     const initData = async () => {
       dispatch(initConversations() as any)
       dispatch(initCurrentConversation() as any)
@@ -66,6 +81,9 @@ export const AppNavigationContainer = () => {
     }
     wait(700, initData)
   }, [])
+  useEffect(() => {
+    resetLocales(languageTag)
+  }, [languageTag])
   return (
     <SafeAreaProvider
       style={{ backgroundColor: theme.colors.background }}>
