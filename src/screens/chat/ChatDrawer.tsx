@@ -20,10 +20,15 @@ import {
 import { RootState } from '@src/store'
 import { SylCommon, useTheme } from '@src/theme'
 import { Theme } from '@src/types'
+import { HeaderButton, Svgs } from '../components'
+import { ChatCMenu } from '../components/context-menu'
 import React, { useEffect } from 'react'
-import { Keyboard, View, Text } from 'react-native'
+import { Keyboard, View, Text, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import ChatScreen from './Chat'
+import { SettingSideBar } from '../components/sidebar'
+import { SettingSideBarContainerStyle } from '../components/sidebar/SettingSideBar'
+
 const defaultScreenOptions = (theme: Theme) => {
   return _defaultScreenOptions(theme, {
     headerBackground: () => (
@@ -46,7 +51,7 @@ const ChatDrawerContent = (props: DrawerContentComponentProps) => {
   }, [isDrawerOpen])
   return (
     <DrawerContentScrollView scrollEnabled={false} {...props}>
-      <Text>dada</Text>
+      <SettingSideBar wrapperWidth={drawerContentWidth} />
     </DrawerContentScrollView>
   )
 }
@@ -65,8 +70,31 @@ const ChatDrawer = ({
       initialRouteName={initialRouteName}
       drawerContent={(props) => <ChatDrawerContent {...props} />}
       screenOptions={{
-        headerLeft: () => <Text>dsadsa</Text>,
-        drawerType: 'slide'
+        headerLeft: () => (
+          <HeaderButton
+            onPress={() => {
+              if (chat.requesting) {
+                return
+              }
+              navigation.dispatch(DrawerActions.toggleDrawer())
+            }}
+            iconNode={<Svgs.headers.Chats theme={theme} />}
+            direction="left"
+          />
+        ),
+        headerRight: () =>
+          chat.chat ? (
+            <ChatCMenu conversation={chat.chat} showTitle={false}>
+              <HeaderButton
+                iconNode={<Svgs.headers.More theme={theme} />}
+              />
+            </ChatCMenu>
+          ) : null,
+        drawerType: 'slide',
+        drawerStyle: SettingSideBarContainerStyle(
+          theme,
+          drawerContentWidth
+        )
       }}>
       <ChatDrawerNavigator.Screen
         key={ROUTES.Chat}

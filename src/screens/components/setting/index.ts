@@ -3,3 +3,4 @@
  */
 
 export * from './SettingTable'
+export * from './SettingOptions'

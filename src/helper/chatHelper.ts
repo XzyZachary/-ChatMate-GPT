@@ -10,8 +10,25 @@ import {
 } from './openai'
 import { uuidv4 } from '@src/utils/uuid'
 import { getTimestampSecond } from '@src/utils/utils'
+import {
+  ResourcePromptInfo,
+  ResourcePromptTag,
+  ResourcePromptTagColors,
+  ResourcePromptTagTypes
+} from './resourcePrompts'
 import { translate } from '@src/i18n'
-
+export type CHAT_ACTION_MENU_TYPE =
+  | 'rename'
+  | 'model'
+  | 'temperature'
+  | 'prompt'
+  | 'messages'
+  | 'copy'
+  | 'share'
+  | 'delete'
+  | 'new'
+  | 'stat'
+  | 'shortcut'
 export type CHAT_MESSAGE_ACTION_MENU_TYPE =
   | 'copy'
   | 'share'
@@ -70,4 +87,14 @@ export const chatStat = (conversation: ChatConversation) => {
     cost,
     gptMessages: gptMessages.length
   }
+}
+
+export interface PromptShortcutInfo {
+  id: number
+  title: string
+  prompt: string
+  tags: ResourcePromptTag[]
+  description?: string
+  website?: string
+  weight: number
 }

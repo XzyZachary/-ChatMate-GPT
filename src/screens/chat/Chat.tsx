@@ -34,10 +34,6 @@ const Chat = ({
   const {
     chat: { chat: currentConversation }
   } = useAppSelector((state: RootState) => state)
-  console.log(
-    33,
-    useAppSelector((state: RootState) => state)
-  )
   const { requesting } = useGPTChat(currentConversation)
   const { checkIsSetAPIKey } = useQuickAction()
   const stat = useMemo(

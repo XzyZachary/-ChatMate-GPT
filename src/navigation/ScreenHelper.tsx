@@ -8,6 +8,12 @@ import { StackNavigationOptions } from '@react-navigation/stack'
 import { SylCommon, Theme } from '@src/theme'
 import NavigationService from './NavigationService'
 import { Avatar } from 'react-native-gifted-chat'
+import {
+  CustomHeaderTitle,
+  CustomHeaderTitleProps,
+  HeaderButton,
+  Svgs
+} from '@src/screens/components'
 // import { logInfo } from '@src/helper'
 export const defaultCommonScreenOptions = (
   theme: Theme,
@@ -88,7 +94,15 @@ export const defaultScreenOptions = (
   headerTitleAlign: 'center',
   headerBackTitle: undefined,
   headerBackTitleVisible: false,
-  headerBackImage: () => <div>asdasddsa</div>,
+  headerBackImage: () => (
+    <HeaderButton
+      direction="left"
+      iconNode={<Svgs.headers.Back theme={theme} />}
+      onPress={() => {
+        NavigationService.goBack()
+      }}
+    />
+  ),
   headerBackground: (): ReactNode => (
     <View style={SylCommon.Header.background(theme)} />
   )

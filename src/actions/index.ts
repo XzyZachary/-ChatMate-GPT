@@ -1,4 +1,5 @@
 export * from './ChatActions'
 export * from './RestActions'
 export * from './CacheActions'
+export * from './SettingActions'
 export * from './OpenAISettingActions'

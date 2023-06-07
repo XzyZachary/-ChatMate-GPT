@@ -5,18 +5,18 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { Spinner } from './components/common'
 import { onAppStart } from './helper/app'
 import { AppNavigationContainer } from './navigation/Navigator'
-// import { ThemeProvider } from './theme'
+import { ThemeProvider } from './theme'
 
 onAppStart(store)
 
 const App = () => {
   return (
     <Provider store={store}>
-      {/* <PersistGate loading={<Spinner />} persistor={persistor}> */}
-      {/* <ThemeProvider> */}
-      <AppNavigationContainer />
-      {/* </ThemeProvider> */}
-      {/* </PersistGate> */}
+      <PersistGate loading={<Spinner />} persistor={persistor}>
+        <ThemeProvider>
+          <AppNavigationContainer />
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   )
 }

@@ -6,4 +6,6 @@ export * from './setting'
 export * from './common'
 export * from './chat'
 
+export * from './action-sheet'
+export * from './context-menu'
 export { default as SNStatusBar } from './statusbar'

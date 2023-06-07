@@ -7,6 +7,7 @@ import {
   NavigationContainer,
   NavigationContainerRefWithCurrent
 } from '@react-navigation/native'
+import SplashScreen from 'react-native-splash-screen'
 import { getSettingApiServer } from '@src/helper'
 import {
   initConversations,
@@ -52,7 +53,10 @@ export const AppNavigationContainer = () => {
   useEffect(() => {
     // 设置语言
     resetLocales(store.getState().setting.languageTag)
-
+    // 延迟300毫秒隐藏启动屏幕，防止白屏
+    wait(300, () => {
+      SplashScreen.hide()
+    })
     const initData = async () => {
       dispatch(initConversations() as any)
       dispatch(initCurrentConversation() as any)
@@ -120,7 +124,7 @@ export const AppNavigationContainer = () => {
               name={ROUTES.Setting}
               component={Screens.Setting}
               options={({ route, navigation }) => ({
-                title: ROUTES.Setting,
+                title: translate(`router.${ROUTES.Setting}`),
                 ...defaultScreenOptions(theme),
                 headerShown: true
               })}

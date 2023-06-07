@@ -10,7 +10,6 @@ import { ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import * as CompS from '../components'
 const Setting = ({ route, navigation }: ScreenProps) => {
-  const { theme } = useTheme()
   return (
     <>
       <ScrollView style={SylCommon.Layout.fill}>

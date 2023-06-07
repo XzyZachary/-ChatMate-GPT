@@ -20,6 +20,7 @@
     "p": "plop",
     "upgrade": "react-native upgrade",
     "check-dependencies": "rnx-dep-check",
+    "react-devtools": "react-devtools",
     "fix-dependencies": "rnx-dep-check --write",
     "npm:check": "npx npm-check-updates",
     "clean": "npx rimraf node_modules",
