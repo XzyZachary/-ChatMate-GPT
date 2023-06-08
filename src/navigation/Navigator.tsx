@@ -129,6 +129,15 @@ export const AppNavigationContainer = () => {
                 headerShown: true
               })}
             />
+            <StackNavigator.Screen
+              name={ROUTES.ApiKeyConfig}
+              component={Screens.ApiKeyConfig}
+              options={({ route, navigation }) => ({
+                title: translate(`router.${ROUTES.ApiKeyConfig}`),
+                ...defaultScreenOptions(theme),
+                headerShown: true
+              })}
+            />
           </StackNavigator.Navigator>
         </NavigationContainer>
       </SheetProvider>

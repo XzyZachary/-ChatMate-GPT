@@ -15,7 +15,10 @@ import {
 import { RadioOption } from '../common'
 import { restartApp } from '@src/utils/devices'
 import { TableList } from '../list'
+import { IMessage } from 'react-native-gifted-chat'
+import { ChatConversation } from '@src/types'
 import { SheetManager } from 'react-native-actions-sheet'
+import { useChatMessageAction } from '@src/hooks/useChatMessageAction'
 
 export const LanguageGroupSettingOptions = () => {
   const { theme } = useTheme()
@@ -23,7 +26,6 @@ export const LanguageGroupSettingOptions = () => {
   const _language = useAppSelector(
     (state) => state.setting.languageTag
   )
-  console.log(12312312321)
   const setting = useAppSelector((state) => state.setting)
   return (
     <TableList
@@ -45,6 +47,52 @@ export const LanguageGroupSettingOptions = () => {
           }
         }
       )}
+    />
+  )
+}
+
+export const ChatMessageOptions = ({
+  conversation,
+  message
+}: {
+  message: IMessage
+  conversation: ChatConversation
+}) => {
+  const { theme } = useTheme()
+  const { chatMessageMenuPress } = useChatMessageAction(
+    message,
+    conversation
+  )
+  return (
+    <TableList
+      containerStyle={{ marginVertical: theme.spacing.small }}
+      rows={[
+        {
+          title: translate('common.copy'),
+          press: () => {
+            chatMessageMenuPress({
+              action: 'copy'
+            })
+          }
+        },
+        {
+          title: translate('common.share'),
+          press: () => {
+            chatMessageMenuPress({
+              action: 'share'
+            })
+          }
+        }
+      ].map((item, _idx) => {
+        return {
+          ...item,
+          withArrow: true,
+          onPress: () => {
+            SheetManager.hide('node-sheet')
+            item.press && item.press()
+          }
+        }
+      })}
     />
   )
 }

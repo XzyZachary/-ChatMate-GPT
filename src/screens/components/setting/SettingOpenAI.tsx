@@ -50,7 +50,7 @@ export const OpenAISettingGroup = () => {
           },
           onPress: () => {
             featureTips('apiKeyTableRowLongPress')
-            // NavigationService.navigate(ROUTES.ApiKeyConfig)
+            NavigationService.navigate(ROUTES.ApiKeyConfig)
           }
         },
         {

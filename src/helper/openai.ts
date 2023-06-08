@@ -329,6 +329,7 @@ export const getOpenAIModels = async (
       : 'https://api.openai.com'
 
   const url = `${_server}/v1/models`
+  console.log(8181818, url)
   const options = {
     method: 'GET',
     headers: {
@@ -339,6 +340,7 @@ export const getOpenAIModels = async (
   try {
     const response = await fetch(url, options)
     const data = await response.json()
+    console.log(11111, data)
     logInfo('getOpenAIModels', url, JSON.stringify(options), data)
     if (data.error) {
       return Promise.reject(new Error(data.error.message))

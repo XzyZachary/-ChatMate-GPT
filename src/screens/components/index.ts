@@ -5,6 +5,7 @@
 export * from './setting'
 export * from './common'
 export * from './chat'
+export * from './edit'
 
 export * from './action-sheet'
 export * from './context-menu'

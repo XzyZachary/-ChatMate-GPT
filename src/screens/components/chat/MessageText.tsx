@@ -10,6 +10,7 @@ import { useTheme } from '@src/theme'
 import { ChatConversation } from '@src/types'
 import React, { useMemo } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
+import { MessageCMenu } from '../context-menu'
 import {
   IMessage,
   MessageText,
@@ -114,4 +115,14 @@ export const RichMessageText = (
     renderMD?: boolean
     conversation: ChatConversation
   }
-) => <Text>dadasd</Text>
+) => (
+  <MessageCMenu
+    message={props!.currentMessage!}
+    conversation={props.conversation}>
+    {props.renderMD && props.position === 'left' ? (
+      <MarkdownMessageText {...props} />
+    ) : (
+      <SimpleMessageText {...props} />
+    )}
+  </MessageCMenu>
+)

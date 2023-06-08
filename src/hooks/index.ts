@@ -10,3 +10,5 @@ export const useAppSelector: TypedUseSelectorHook<RootState> =
   useSelector
 
 export * from '@src/hooks/useGPTChat'
+
+export * from '@src/hooks/useSettingAction'

@@ -1,5 +1,11 @@
-import { ApiServerInfo, APP_API_SERVERS_UPDATE } from '../types'
+import {
+  ApiServerInfo,
+  APP_API_SERVERS_UPDATE,
+  APP_SETTING_API_KEY,
+  APP_SETTING_API_SERVER
+} from '../types'
 import { Dispatch } from 'redux'
+import OpenApi from '@src/api'
 import { RootState } from '@src/store'
 import OpenAIApi from '@src/api'
 import { getSettingApiServer } from '@src/helper'
@@ -36,4 +42,27 @@ export const updateApiServers =
 export const setApiServers = (apiServers: ApiServerInfo[]) => ({
   type: APP_API_SERVERS_UPDATE,
   payload: apiServers
+})
+
+export const updateApiServer =
+  (apiServer: string) => async (dispatch: Dispatch) => {
+    OpenApi.setApiBasePath(apiServer)
+
+    dispatch(setApiServer(apiServer))
+  }
+
+export const setApiServer = (apiServer: string) => ({
+  type: APP_SETTING_API_SERVER,
+  payload: apiServer
+})
+
+export const updateApiKey =
+  (apiKey: string) => async (dispatch: Dispatch) => {
+    OpenApi.setApiKey(apiKey)
+    dispatch(setApiKey(apiKey))
+  }
+
+export const setApiKey = (apiKey: string) => ({
+  type: APP_SETTING_API_KEY,
+  payload: apiKey
 })
